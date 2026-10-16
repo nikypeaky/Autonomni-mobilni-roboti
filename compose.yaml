@@ -1,0 +1,28 @@
+services:
+  ros:
+    build: ./zadatak1
+    image: amr_lv1_zad1
+    container_name: amr_zad1
+    network_mode: host
+    ipc: host
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+    restart: unless-stopped
+
+  app:
+    build: ./zadatak2
+    image: amr_lv1_zad2
+    container_name: amr_zad2
+    network_mode: host
+    ipc: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROSBRIDGE_HOST=localhost
+      - ROSBRIDGE_PORT=9090
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+    depends_on:
+      - ros
+    restart: on-failure

@@ -1,0 +1,9 @@
+<launch>
+  <node pkg="turtlesim" exec="turtlesim_node" name="turtlesim" output="screen" />
+
+  <node pkg="turtle_path" exec="path_follower" name="path_follower" output="screen" />
+
+  <include file="$(find-pkg-share rosbridge_server)/launch/rosbridge_websocket_launch.xml">
+    <arg name="port" value="9090" />
+  </include>
+</launch>
